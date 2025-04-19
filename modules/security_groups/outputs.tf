@@ -1,7 +1,7 @@
-output "security_group_ids" {
-  value = aws_security_group.my_security_group.*.id
+output "public_sg_id" {
+  value = aws_security_group.public_sg.id
 }
 
-output "security_group_names" {
-  value = aws_security_group.my_security_group.*.name
+output "private_sg_id" {
+  value = aws_security_group.private_sg.id
 }

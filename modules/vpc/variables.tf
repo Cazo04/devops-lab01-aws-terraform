@@ -1,31 +1,25 @@
-variable "vpc_cidr" {
-  description = "The CIDR block for the VPC"
+variable "project_name" {
   type        = string
+  description = "Project name for tagging"
+}
+
+variable "vpc_cidr" {
+  type        = string
+  description = "CIDR for VPC"
   default     = "10.0.0.0/16"
 }
 
-variable "vpc_name" {
-  description = "The name of the VPC"
-  type        = string
-  default     = "my-vpc"
+variable "public_subnets" {
+  type        = list(string)
+  description = "List of CIDRs for public subnets"
 }
 
-variable "enable_dns_support" {
-  description = "Enable DNS support in the VPC"
-  type        = bool
-  default     = true
+variable "private_subnets" {
+  type        = list(string)
+  description = "List of CIDRs for private subnets"
 }
 
-variable "enable_dns_hostnames" {
-  description = "Enable DNS hostnames in the VPC"
-  type        = bool
-  default     = true
-}
-
-variable "tags" {
-  description = "A map of tags to assign to the VPC"
-  type        = map(string)
-  default     = {
-    Name = "my-vpc"
-  }
+variable "azs" {
+  type        = list(string)
+  description = "List of Availability Zones to use"
 }

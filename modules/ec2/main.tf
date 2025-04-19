@@ -1,34 +1,30 @@
-resource "aws_instance" "example" {
-  ami           = var.ami
-  instance_type = var.instance_type
+# Create Public EC2
+resource "aws_instance" "public" {
+  ami                    = var.ami_id
+  instance_type          = var.instance_type
+  subnet_id              = var.public_subnet_id
+  vpc_security_group_ids = [var.public_sg_id]
+
+  key_name               = var.key_name 
+  associate_public_ip_address = true
 
   tags = {
-    Name = var.instance_name
+    Name = "${var.project_name}-public-ec2"
   }
 }
 
-resource "aws_security_group" "example" {
-  name        = var.security_group_name
-  description = "Allow SSH and HTTP traffic"
+# Create Private EC2
+resource "aws_instance" "private" {
+  ami                    = var.ami_id
+  instance_type          = var.instance_type
+  subnet_id              = var.private_subnet_id
+  vpc_security_group_ids = [var.private_sg_id]
 
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = var.allowed_cidrs
-  }
+  # Don't assign public IP to private instance
+  associate_public_ip_address = false
+  key_name                    = var.key_name
 
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = var.allowed_cidrs
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+  tags = {
+    Name = "${var.project_name}-private-ec2"
   }
 }
