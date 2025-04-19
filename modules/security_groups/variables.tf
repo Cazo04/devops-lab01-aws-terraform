@@ -1,31 +1,15 @@
+variable "project_name" {
+  type        = string
+  description = "Project name for tagging"
+}
+
 variable "vpc_id" {
-  description = "The ID of the VPC where the security groups will be created."
   type        = string
+  description = "VPC ID"
 }
 
-variable "security_group_name" {
-  description = "The name of the security group."
+variable "my_ip" {
   type        = string
-}
-
-variable "ingress_rules" {
-  description = "List of ingress rules for the security group."
-  type        = list(object({
-    from_port   = number
-    to_port     = number
-    protocol    = string
-    cidr_blocks  = list(string)
-  }))
-  default     = []
-}
-
-variable "egress_rules" {
-  description = "List of egress rules for the security group."
-  type        = list(object({
-    from_port   = number
-    to_port     = number
-    protocol    = string
-    cidr_blocks  = list(string)
-  }))
-  default     = []
+  description = "Client's static IP address for SSH access to EC2 (in CIDR format)"
+  default     = "0.0.0.0/0"
 }

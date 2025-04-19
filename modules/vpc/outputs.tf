@@ -1,11 +1,11 @@
 output "vpc_id" {
-  value = aws_vpc.main.id
+  value = aws_vpc.this.id
 }
 
-output "vpc_cidr" {
-  value = aws_vpc.main.cidr_block
+output "public_subnets_id" {
+  value = aws_subnet.public[*].id
 }
 
-output "vpc_azs" {
-  value = aws_vpc.main.availability_zones
+output "private_subnets_id" {
+  value = aws_subnet.private[*].id
 }
