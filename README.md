@@ -89,7 +89,7 @@
 | Variable | Type | Default | Description |
 |----------|------|---------|-------------|
 | `region` | string | `"us-east-1"` | AWS region |
-| `project_name` | string | `"tf-demo"` | Tag prefix for all resources |
+| `project_name` | string | `"devops-lab01"` | Tag prefix for all resources |
 | `vpc_cidr` | string | `"10.0.0.0/16"` | VPC CIDR range |
 | `public_subnets` | list(string) | `["10.0.1.0/24"]` | One CIDR block per AZ for public subnets |
 | `private_subnets` | list(string) | `["10.0.2.0/24"]` | One CIDR block per AZ for private subnets |
@@ -157,7 +157,7 @@ terraform apply "plan.out"
    ```
 4. From the bastion, SSH into the private instance:
    ```bash
-   ssh -i ~/.ssh/my-keypair.pem ec2-user@<private_ec2_id>
+   ssh -i ~/.ssh/my-keypair.pem ec2-user@<private_ec2_private_ip>
    ```
 5. On the private instance, run `curl https://api.ipify.org` — you should get the NAT GW EIP.
 
